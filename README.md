@@ -5,7 +5,7 @@ This project automates the process of resume bullet point generation by extracti
 By integrating the ChatGPT API, it generates impactful bullet points for resume based on this data.<br />
 This project combines data gathering via APIs and web data scraping, applying NLP techniques to extract useful information from collected data and finally generating resume bullets points by integrating LLM like ChatGPT.
 
-## Steps to follow:
+## Steps for Testing:
 ### Step 1: Clone this git repo and use your respective code editor.
 If you use VS Code, you can simply click on the icon below and click on clone repository and copy paste this http link: "https://github.com/hru952/CSC-899.git" <br />
 ![image](https://github.com/hru952/CSC-899/assets/124914776/fad95448-b7a9-41f1-b254-90c442af876e)
@@ -16,8 +16,12 @@ If you use VS Code, you can simply click on the icon below and click on clone re
 - An access token will be generated and the following box appears. MAKE SURE TO COPY THIS API TOKEN. <br/> ![image](https://github.com/hru952/CSC-899/assets/124914776/3b7c20d1-1870-4a99-b5fd-af493593bd83)
 - If you didn't copy the API token, simply repeat this process and generate a new API key and make sure to copy it.
 ### Step 3: Run the code
-- Run the "project.py" file.
-- It will ask you to input the API token. Paste the API token copied in previous step.
-- It will display all the courses you registered for and ask to choose course(s) that you want your submissions to be downloaded from and generate the resume.
+- Run the "project.py" file. It will ask you to enter the canvas API key. Paste the API token copied in previous step and click enter. <br/> ![image](https://github.com/hru952/CSC-899/assets/124914776/d8d391ae-8cbb-450b-afc7-bf61df315682)
+- It will then display list of all the courses you registered for and ask to choose course(s) that you want your submissions to be downloaded from and generate the resume and press enter.<br/> ![image](https://github.com/hru952/CSC-899/assets/124914776/08fd1745-d6f6-47dc-b4f6-213e256ea4d7)
+- You are all set. The tool will take care of the rest and generate resume bullet points for you.
+### Step 4: Provide feedback
+- Use this google form link and rate the performance of the tool : 'TBD'
+## Thank you for volunteering to test my application !! 
+
 
 
