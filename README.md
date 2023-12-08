@@ -15,5 +15,9 @@ If you use VS Code, you can simply click on the icon below and click on clone re
 - The below box will open. Set the expires to 31st May and click on "Generate Token". <br/> ![image](https://github.com/hru952/CSC-899/assets/124914776/5e7cb961-8b9e-466f-865d-72a7fd4e5958)
 - An access token will be generated and the following box appears. MAKE SURE TO COPY THIS API TOKEN. <br/> ![image](https://github.com/hru952/CSC-899/assets/124914776/3b7c20d1-1870-4a99-b5fd-af493593bd83)
 - If you didn't copy the API token, simply repeat this process and generate a new API key and make sure to copy it.
+### Step 3: Run the code
+- Run the "project.py" file.
+- It will ask you to input the API token. Paste the API token copied in previous step.
+- It will display all the courses you registered for and ask to choose course(s) that you want your submissions to be downloaded from and generate the resume.
 
 
