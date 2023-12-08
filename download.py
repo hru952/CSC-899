@@ -2,7 +2,7 @@ import requests
 from datetime import datetime
 
 # Replace with your Canvas API token and the base URL for your Canvas instance
-API_TOKEN = '21165~71rgxYEiCOeRBwu7xzY745XKQ3vVusKvNXzkYUQpnLatrQTRZpZ3XhFFFiWSTsJY'
+API_TOKEN = 'XXXX'
 BASE_URL = "https://sfsu.instructure.com/api/v1"
 
 def format_due_date(iso_date):
