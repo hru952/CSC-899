@@ -1,26 +1,23 @@
 import requests
-from datetime import datetime
 
-# Replace with your Canvas API token and the base URL for your Canvas instance
-API_TOKEN = 'XXXX'
+# Read the user's Canvas API token
+API_TOKEN = input("Enter your Canvas API key: ")
 BASE_URL = "https://sfsu.instructure.com/api/v1"
 
-def format_due_date(iso_date):
-    if iso_date:
-        due_date = datetime.strptime(iso_date, '%Y-%m-%dT%H:%M:%SZ')
-        return due_date.strftime('%Y-%m-%d %I:%M:%S %p')
-    else:
-        return "No due date"
-    
+#Function that facilitates submission downloading   
 def download_submission(course_id,assignment_id):
+
     submission_url = f"{BASE_URL}/courses/{course_id}/assignments/{assignment_id}/submissions/self"
     response = requests.get(submission_url, headers=headers)
+
     if response.status_code == 200:
         submission_data = response.json()
+
         if "attachments" in submission_data and len(submission_data["attachments"]) > 0:
             attachment = submission_data["attachments"][0]
             download_url = attachment["url"]
             file_response = requests.get(download_url)
+
             if file_response.status_code == 200:
                 file_name = attachment["filename"]
                 with open(file_name, "wb") as file:
@@ -28,38 +25,47 @@ def download_submission(course_id,assignment_id):
                     print(f"PDF file '{file_name}' downloaded successfully.")
             else:
                 print("Failed to download the file:", file_response.status_code)
+
         else:
             print("No attachments found in the submission data.")
+
     else:
         print("Failed to retrieve submission data:", response.status_code)
 
-# Example: Get a list of all courses
+# Get a list of all enrolled courses from Canvas
 courses_url = f'{BASE_URL}/courses'
 headers = {'Authorization': f'Bearer {API_TOKEN}'}
-
 response = requests.get(courses_url, headers=headers)
 
-# Words to include in assignment names
+# Heuristics to select or reject an assignment
 included_words = ["project", "team", "group"]
-
-# Words to exclude from assignment names
 excluded_words = ["mid", "midterm", "final", "extra", "credit", "exam"]
 
 # Check if the request was successful
 if response.status_code == 200:
     courses_data = response.json()
-    # Iterate through the courses
-    for course in courses_data:
+    print("\nSelect one or more courses from the list of all registered courses:")
+    # Print all registered course list for user to select from
+    for index, course in enumerate(courses_data, start=1):
         course_id = course['id']
         course_name = course['name']
-        
-        # Check if course name contains "master's" and skip if it does
-        if "master's" in course_name.lower():
+        print(f"{index}. {course_name}")
+
+    # Prompt the user to input the course indexes they want to download assignments from
+    print("\nChoose the course(s) (choose one or more) that you want to be considered for resume generation and enter the course numbers as comma-separated values without spaces.")
+    print("Example: 1,5,6")
+    selected_indexes = input("\nEnter your choice of course numbers: ")
+    selected_indexes = [int(index) for index in selected_indexes.split(',')]
+
+    # Iterate through the selected courses and download submissions
+    for index, course in enumerate(courses_data, start=1):
+
+        if index not in selected_indexes:
             continue
 
-        print(f"\nCourse ID: {course_id}, Course Name: {course_name}")
+        course_id = course['id']
+        course_name = course['name']
 
-        # Retrieve assignments for the current course
         assignments_url = f"{BASE_URL}/courses/{course_id}/assignments"
         response = requests.get(assignments_url, headers=headers)
 
@@ -76,31 +82,30 @@ if response.status_code == 200:
                     project_or_team_assignments.append({'id': assignment_id, 'name': assignment_name})
 
             if project_or_team_assignments:
-                # Print assignments with included words in their names
-                print("Assignments with 'project,' 'team,' or 'group' in the name:")
+                # Print assignments with included words in their names and download the file
+                print(f"\nSelected submissions from {course_name}:")
                 for assignment_info in project_or_team_assignments:
-                    print("ID:", assignment_info['id'], "Name:", assignment_info['name'])
+                    print("\nName:", assignment_info['name'])
                     download_submission(course_id,assignment_info['id'])
             
             else:
-
-                # If no assignments with included words, print the names of all assignments
+                # If no assignments with included words
                 all_assignments = [{'id': assignment['id'], 'name': assignment['name']} for assignment in assignments]
-
                 # Exclude assignments with excluded words from the last two assignments
                 last_assignments = [assignment for assignment in all_assignments if all(word not in assignment['name'].lower() for word in excluded_words)]
 
                 if len(last_assignments) >= 2:
-                    print("No 'project,' 'team,' or 'group' assignments. Last Two Assignments (excluding specific words):")
+                    print(f"\nSelected submissions from {course_name}:")
+
                     for assignment_info in last_assignments[-2:]:
-                        if course_id == 23452 or course_id == 28446:
-                            continue
-                        else:
-                            print("ID:", assignment_info['id'], "Name:", assignment_info['name'])
+                            print("\nName:", assignment_info['name'])
                             download_submission(course_id,assignment_info['id'])
+
                 else:
-                    print("Less than two assignments after exclusions.")
+                    print("No suitable submissions to download.")
+
         else:
             print(f"Error retrieving assignments for Course ID {course_id}")
+
 else:
     print(f"Error: {response.status_code} - {response.text}")
