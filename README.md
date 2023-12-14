@@ -1,5 +1,5 @@
 # CSC-899 : Personalized Resume Bullet Point Generator From Student Academic and Project Data
-
+<<Need to add all library installatins to be made.
 ## Introduction:
 This project automates the process of resume bullet point generation by extracting data from student’s Canvas account.<br />
 By integrating the ChatGPT API, it generates impactful bullet points for resume based on this data.<br />
