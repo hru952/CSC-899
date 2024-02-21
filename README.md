@@ -11,7 +11,7 @@ This project combines data gathering via APIs and web data scraping, applying NL
  pip install PyPDF2 <br />
  pip install json <br />
  pip install torch <br />
- Note that getting these libraries installed might take a while, specially the transformers.
+ _Note that getting these libraries installed might take a while, specially the transformers._
 ### Step 1: Clone this git repo and use your respective code editor.
 If you use VS Code, you can simply click on the icon below and click on clone repository and copy paste this http link: "https://github.com/hru952/CSC-899.git" <br />
 ![image](https://github.com/hru952/CSC-899/assets/124914776/fad95448-b7a9-41f1-b254-90c442af876e)
