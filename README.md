@@ -24,8 +24,7 @@ If you use VS Code, you can simply click on the icon below and click on clone re
 - You are all set. The tool will take care of the rest and generate resume bullet points for you.
 ### Step 4: Provide feedback
 - Use this google form link and rate the performance of the tool : https://forms.gle/PXUd5D2rL3ZxaTD96
-## Thank you for volunteering to test my application !! 
-<<Need to add all library installatins to be made.
+## Thank you for volunteering to test my tool !! 
 
 
 
