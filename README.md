@@ -9,6 +9,7 @@ This project combines data gathering via APIs and web data scraping, applying NL
  pip install requests <br />
  pip install transformers <br />
  pip install PyPDF2 <br />
+ pip install python-docx <br />
  pip install json <br />
  pip install torch <br /> <br/>
  _Note that getting these libraries installed might take a while, specially the transformers._
